@@ -11,7 +11,7 @@ Main interface:
 
 - Java 11
 
-(#how-to-run)
+### how-to-run
 
 - clone and download repository
 - make sure you have switched to Java 11*
