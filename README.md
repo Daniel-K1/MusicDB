@@ -1,7 +1,7 @@
 #Overall
 
 MusicDatabase simple database app with graphical UI (JavaFX) and connection to local SQL datatbase file (SQLite driver). 
-Using Java 9 module feature to separate UI from Model and Controller layers. Maven multimodule support, creates thin jar for each and every module and one fat jat wit all modules (Please refer to [how to run](###how to run) section of this readme for details)
+Using Java 9 module feature to separate UI from Model and Controller layers. Maven multimodule support, creates thin jar for each and every module and one fat jat wit all modules (Please refer to [how to run](#how-to-run) section of this readme for details)
 
 Main interface:
 
@@ -11,7 +11,7 @@ Main interface:
 
 - Java 11
 
-(### How to run)
+(#How-to-run)
 
 - clone and download repository
 - make sure you have switched to Java 11*
