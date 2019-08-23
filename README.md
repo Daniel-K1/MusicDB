@@ -32,4 +32,6 @@ java -jar com.danielk.ui/target/MusicDatabase-ui-1.0-SNAPSHOT.jar
 
 However, functionality is not available so far as modules in current project are too dependent to each other
 
+
+
 _*due to an error in Maven plugin "maven-compiler-plugin" app doesn't work with Java 12 and higher so far_
