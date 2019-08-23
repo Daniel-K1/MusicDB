@@ -1,18 +1,16 @@
-package com.company.common;
+package com.danielk.common;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Album {
+public class Artist {
 
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
-    private SimpleIntegerProperty artistId;
 
-    public Album() {
+    public Artist() {
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
-        this.artistId = new SimpleIntegerProperty();
     }
 
     public int getId() {
@@ -29,13 +27,5 @@ public class Album {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public int getArtistId() {
-        return artistId.get();
-    }
-
-    public void setArtistId(int artistId) {
-        this.artistId.set(artistId);
     }
 }

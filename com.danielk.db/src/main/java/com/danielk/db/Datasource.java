@@ -1,7 +1,7 @@
-package com.company.db;
+package com.danielk.db;
 
-import com.company.common.Album;
-import com.company.common.Artist;
+import com.danielk.common.Album;
+import com.danielk.common.Artist;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +11,6 @@ public class Datasource {
 
     private static final String DB_NAME = "music.db";
 
-    //    private static final String CONNECTION_STRING = "jdbc:sqlite:D:\\databases\\" + DB_NAME;
     private static final String CONNECTION_STRING = "jdbc:sqlite:" + DB_NAME;
 
     private static final String TABLE_ALBUMS = "albums";
@@ -44,15 +43,15 @@ public class Datasource {
 
     private static final String QUERY_ALBUMS_BY_ARTIST_START =
             "SELECT " + TABLE_ALBUMS + '.' + COLUMN_ALBUM_NAME + " FROM " + TABLE_ALBUMS +
-                    " INNER JOIN " + TABLE_ARTISTS + " ON " + TABLE_ALBUMS + "." + COLUMN_ALBUM_ARTIST +
+                    " INNER JOIN " + TABLE_ARTISTS + " ON " + TABLE_ALBUMS + "" + COLUMN_ALBUM_ARTIST +
                     " = " + TABLE_ARTISTS + "." + COLUMN_ARTIST_ID +
                     " WHERE " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + " = \"";
 
     private static final String QUERY_ALBUMS_BY_ARTIST_SORT =
-            " ORDER BY " + TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " COLLATE NOCASE ";
+            " ORDER BY " + TABLE_ALBUMS + "" + COLUMN_ALBUM_NAME + " COLLATE NOCASE ";
 
     private static final String QUERY_ARTIST_FOR_SONG_START =
-            "SELECT " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
+            "SELECT " + TABLE_ARTISTS + "" + COLUMN_ARTIST_NAME + ", " +
                     TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + ", " +
                     TABLE_SONGS + "." + COLUMN_SONG_TRACK + " FROM " + TABLE_SONGS +
                     " INNER JOIN " + TABLE_ALBUMS + " ON " +
@@ -62,13 +61,13 @@ public class Datasource {
                     " WHERE " + TABLE_SONGS + "." + COLUMN_SONG_TITLE + " = \"";
 
     private static final String QUERY_ARTIST_FOR_SONG_SORT =
-            " ORDER BY " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
+            " ORDER BY " + TABLE_ARTISTS + "" + COLUMN_ARTIST_NAME + ", " +
                     TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " COLLATE NOCASE ";
 
     private static final String TABLE_ARTIST_SONG_VIEW = "artist_list";
 
     private static final String CREATE_ARTIST_FOR_SONG_VIEW = "CREATE VIEW IF NOT EXISTS " +
-            TABLE_ARTIST_SONG_VIEW + " AS SELECT " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
+            TABLE_ARTIST_SONG_VIEW + " AS SELECT " + TABLE_ARTISTS + "" + COLUMN_ARTIST_NAME + ", " +
             TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " AS " + COLUMN_SONG_ALBUM + ", " +
             TABLE_SONGS + "." + COLUMN_SONG_TRACK + ", " + TABLE_SONGS + "." + COLUMN_SONG_TITLE +
             " FROM " + TABLE_SONGS +

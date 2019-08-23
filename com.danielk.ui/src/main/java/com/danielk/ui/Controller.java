@@ -1,7 +1,10 @@
-package com.company.ui;
+package com.danielk.ui;
 
-import com.company.common.*;
-import com.company.db.*;
+import com.danielk.common.*;
+import com.danielk.db.*;
+import com.danielk.common.Album;
+import com.danielk.common.Artist;
+import com.danielk.db.Datasource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
