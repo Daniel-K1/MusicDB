@@ -1,7 +1,5 @@
 package com.danielk.ui;
 
-import com.danielk.common.*;
-import com.danielk.db.*;
 import com.danielk.common.Album;
 import com.danielk.common.Artist;
 import com.danielk.db.Datasource;
@@ -11,9 +9,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Controller {
+
+    private final static Logger LOG = LogManager.getLogger();
 
     @FXML
     private TableView artistTable;
@@ -39,7 +40,7 @@ public class Controller {
     public void listAlbumsForArtist() {
         final Artist artist = (Artist) artistTable.getSelectionModel().getSelectedItem();
         if(artist == null) {
-            System.out.println("NO ARTIST SELECTED");
+            LOG.warn("NO ARTIST SELECTED");
             return;
         }
         Task<ObservableList<Album>> task = new Task<ObservableList<Album>>() {

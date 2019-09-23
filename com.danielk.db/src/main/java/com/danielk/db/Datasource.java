@@ -2,6 +2,8 @@ package com.danielk.db;
 
 import com.danielk.common.Album;
 import com.danielk.common.Artist;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -124,6 +126,7 @@ public class Datasource {
     private PreparedStatement updateArtistName;
 
     private static Datasource instance = new Datasource();
+    private final static Logger LOG= LogManager.getLogger();
 
     private Datasource() {
 
@@ -150,8 +153,7 @@ public class Datasource {
 
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Couldn't connect to database: " + e.getMessage());
+            LOG.fatal("Couldn't connect to database: " + e);
             return false;
         }
     }
@@ -195,7 +197,7 @@ public class Datasource {
                 conn.close();
             }
         } catch (SQLException e) {
-            System.out.println("Couldn't close connection: " + e.getMessage());
+            LOG.error("Couldn't close connection: " + e);
         }
     }
 
@@ -222,7 +224,7 @@ public class Datasource {
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
-                    System.out.println("Interuppted: " + e.getMessage());
+                    LOG.error("Interuppted: " + e);
                 }
                 Artist artist = new Artist();
                 artist.setId(results.getInt(INDEX_ARTIST_ID));
@@ -233,7 +235,7 @@ public class Datasource {
             return artists;
 
         } catch (SQLException e) {
-            System.out.println("Query failed: " + e.getMessage());
+            LOG.error("Query failed: " + e);
             return null;
         }
     }
@@ -254,7 +256,7 @@ public class Datasource {
 
             return albums;
         } catch (SQLException e) {
-            System.out.println("Query failed: " + e.getMessage());
+            LOG.error("Query failed: " + e);
             return null;
         }
     }
@@ -274,8 +276,6 @@ public class Datasource {
             }
         }
 
-        System.out.println("SQL statement = " + sb.toString());
-
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
@@ -287,7 +287,7 @@ public class Datasource {
             return albums;
 
         } catch (SQLException e) {
-            System.out.println("Query failed: " + e.getMessage());
+            LOG.error("Query failed: " + e);
             return null;
         }
     }
@@ -301,11 +301,12 @@ public class Datasource {
             ResultSetMetaData meta = results.getMetaData();
             int numColumns = meta.getColumnCount();
             for (int i = 1; i <= numColumns; i++) {
-                System.out.format("Column %d in the songs table is names %s\n",
+
+                LOG.trace("Column %d in the songs table is names %s\n",
                         i, meta.getColumnName(i));
             }
         } catch (SQLException e) {
-            System.out.println("Query failed: " + e.getMessage());
+            LOG.error("Query failed: " + e);
         }
     }
 
@@ -316,10 +317,10 @@ public class Datasource {
 
             int count = results.getInt("count");
 
-            System.out.format("Count = %d\n", count);
+            LOG.trace("Count = %d\n", count);
             return count;
         } catch (SQLException e) {
-            System.out.println("Query failed: " + e.getMessage());
+            LOG.error("Query failed: " + e);
             return -1;
         }
     }
@@ -332,7 +333,7 @@ public class Datasource {
             return true;
 
         } catch (SQLException e) {
-            System.out.println("Create View failed: " + e.getMessage());
+            LOG.error("Create View failed: " + e);
             return false;
         }
     }
@@ -395,7 +396,7 @@ public class Datasource {
             return affectedRecords == 1;
 
         } catch (SQLException e) {
-            System.out.println("Update failed: " + e.getMessage());
+            LOG.error("Update failed: " + e);
             return false;
         }
     }
@@ -418,36 +419,20 @@ public class Datasource {
             }
 
         } catch (Exception e) {
-            System.out.println("Insert song exception: " + e.getMessage());
+            LOG.warn("Insert song exception: " + e);
             try {
-                System.out.println("Performing rollback");
+                LOG.info("Performing rollback");
                 conn.rollback();
             } catch (SQLException e2) {
-                System.out.println("Oh boy! Things are really bad! " + e2.getMessage());
+                LOG.error("Error: "+e2);
             }
         } finally {
             try {
-                System.out.println("Resetting default commit behavior");
+                LOG.info("Resetting default commit behavior");
                 conn.setAutoCommit(true);
             } catch (SQLException e) {
-                System.out.println("Couldn't reset auto-commit! " + e.getMessage());
+                LOG.error("Couldn't reset auto-commit! " + e);
             }
-
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

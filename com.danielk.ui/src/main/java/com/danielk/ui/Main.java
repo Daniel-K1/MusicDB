@@ -7,8 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main extends Application {
+
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -26,7 +30,7 @@ public class Main extends Application {
     public void init() throws Exception {
         super.init();
         if(!Datasource.getInstance().open()) {
-            System.out.println("FATAL ERROR: Couldn't connect to database");
+            LOG.fatal("FATAL ERROR: Couldn't connect to database");
             Platform.exit();
         }
     }
