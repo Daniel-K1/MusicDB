@@ -2,8 +2,8 @@ package com.danielk.db;
 
 import com.danielk.common.Album;
 import com.danielk.common.Artist;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public class Datasource {
     private PreparedStatement updateArtistName;
 
     private static Datasource instance = new Datasource();
-    private final static Logger LOG= LogManager.getLogger();
+    private final static Logger LOG= LoggerFactory.getLogger(Datasource.class);
 
     private Datasource() {
 
@@ -153,7 +153,7 @@ public class Datasource {
 
             return true;
         } catch (SQLException e) {
-            LOG.fatal("Couldn't connect to database: " + e);
+            LOG.error("Couldn't connect to database: " + e);
             return false;
         }
     }

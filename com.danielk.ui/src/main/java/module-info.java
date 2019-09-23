@@ -6,6 +6,7 @@ module com.danielk.ui {
     requires javafx.graphics;
     requires javafx.controls;
     requires org.apache.logging.log4j;
+    requires org.slf4j;
 
     opens com.danielk.ui to javafx.fxml;
 

@@ -9,12 +9,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class Controller {
 
-    private final static Logger LOG = LogManager.getLogger();
+    private final static Logger LOG = LoggerFactory.getLogger(Controller.class);
 
     @FXML
     private TableView artistTable;
